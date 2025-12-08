@@ -51,7 +51,7 @@ export function renderStudentTable(students) {
     
     // Find the 'Delete' button within this specific row and attach a click handler
     // When clicked, call the deleteStudentAction function with the correct student ID
-    row.querySelector("[data-delete]").onclick = () => deleteStudentAction(student.id);
+    // row.querySelector("[data-delete]").onclick = () => deleteStudentAction(student.id);
 
     // Append the fully constructed row to the table body
     body.appendChild(row);

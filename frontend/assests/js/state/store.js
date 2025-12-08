@@ -1,47 +1,15 @@
-const API_URL = window.ENV.API_BASE_URL;
+// Global app state
+let state = {
+  editingId: null,   // which student is being edited
+  students: []       // list of all students
+};
 
-// Helper: safely parse JSON or return null
-async function safeJson(res) {
-  try {
-    return await res.json();
-  } catch (_) {
-    return null;
-  }
+// Update part of the state
+export function setState(newState) {
+  state = { ...state, ...newState };
 }
 
-// Fetch all students
-export async function apiGetAll() {
-  const res = await fetch(API_URL);
-  if (!res.ok) return [];
-  return safeJson(res);
+// Read the current state
+export function getState() {
+  return state;
 }
-
-// // Fetch one student by ID
- export async function apiGetOne(id) {
-   const res = await fetch(`${API_URL}/${id}`);
-   if (!res.ok) return null;
-   return safeJson(res);
- }
-
-// // Create a new student
- export function apiCreate(data) {
-   return fetch(API_URL, {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify(data)
-   });
- }
-
- // Update a student
- export function apiUpdate(id, data) {
-   return fetch(`${API_URL}/${id}`, {
-     method: "PUT",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify(data)
-   });
- }
-
- // Delete a student
- export function apiDelete(id) {
-   return fetch(`${API_URL}/${id}`, { method: "DELETE" });
- }
